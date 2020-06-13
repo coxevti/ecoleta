@@ -1,10 +1,10 @@
-import Home from 'pages/Home';
 import React from 'react';
+import Routes from 'routes';
 import StyleGlobal from 'styles/global';
 
 const App: React.FC = () => (
   <>
-    <Home />
+    <Routes />
     <StyleGlobal />
   </>
 );

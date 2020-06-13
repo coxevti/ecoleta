@@ -1,5 +1,6 @@
 import React from 'react';
 import { LogIn } from 'react-feather';
+import { Link } from 'react-router-dom';
 import { Background, Container, Content } from './styles';
 
 const Home: React.FC = () => {
@@ -14,12 +15,12 @@ const Home: React.FC = () => {
           <p>
             Ajudamos pessoas a encontrarem pontos de coleta de forma eficiente.
           </p>
-          <a href="/cadastro">
+          <Link to="/create-point">
             <span>
               <LogIn />
             </span>
             <strong>Cadastre um ponto de coleta</strong>
-          </a>
+          </Link>
         </main>
       </Content>
       <Background />
