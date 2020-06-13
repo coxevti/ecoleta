@@ -30,6 +30,9 @@ time, mark, audio, video {
   font: inherit;
   vertical-align: baseline;
 }
+:focus {
+    outline: 0;
+}
 * {
   box-sizing: border-box;
   outline: 0;
