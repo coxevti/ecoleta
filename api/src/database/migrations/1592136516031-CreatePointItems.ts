@@ -20,11 +20,11 @@ export default class CreatePointItems1592136516031
             default: 'uuid_generate_v4()',
           },
           {
-            name: 'pointId',
+            name: 'pointsId',
             type: 'uuid',
           },
           {
-            name: 'itemId',
+            name: 'itemsId',
             type: 'uuid',
           },
           {
@@ -44,7 +44,7 @@ export default class CreatePointItems1592136516031
       'pointItems',
       new TableForeignKey({
         name: 'FKPoint',
-        columnNames: ['pointId'],
+        columnNames: ['pointsId'],
         referencedColumnNames: ['id'],
         referencedTableName: 'points',
         onDelete: 'CASCADE',
@@ -55,7 +55,7 @@ export default class CreatePointItems1592136516031
       'pointItems',
       new TableForeignKey({
         name: 'FKItem',
-        columnNames: ['itemId'],
+        columnNames: ['itemsId'],
         referencedColumnNames: ['id'],
         referencedTableName: 'items',
         onDelete: 'CASCADE',
