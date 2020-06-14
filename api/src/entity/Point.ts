@@ -3,9 +3,12 @@ import {
   CreateDateColumn,
   Entity,
   Index,
+  JoinTable,
+  ManyToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
+import Item from './Item';
 
 @Entity('points')
 class Point {
@@ -42,6 +45,10 @@ class Point {
 
   @UpdateDateColumn({ name: 'updated_at' })
   updatedAt: Date;
+
+  @ManyToMany(() => Item)
+  @JoinTable({ name: 'pointItems' })
+  items: Item[];
 }
 
 export default Point;
