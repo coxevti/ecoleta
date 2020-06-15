@@ -1,3 +1,4 @@
+import Cors from 'cors';
 import 'dotenv/config';
 import express, { NextFunction, Request, Response } from 'express';
 import 'express-async-errors';
@@ -9,6 +10,7 @@ import routes from './routes';
 const app = express();
 app.disable('x-powered-by');
 app.use(express.json());
+app.use(Cors());
 app.use(routes);
 
 app.use((err: Error, req: Request, res: Response, _: NextFunction) => {
