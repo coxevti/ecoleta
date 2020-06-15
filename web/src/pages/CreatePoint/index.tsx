@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { ArrowLeft, MapPin } from 'react-feather';
 import { Map, Marker, TileLayer } from 'react-leaflet';
 import { Link } from 'react-router-dom';
+import api from 'services/api';
 import {
   Container,
   Form,
@@ -11,7 +12,19 @@ import {
   FormItemsGrid,
 } from './styles';
 
+interface ResponseItems {
+  id: string;
+  name: string;
+  imageUrl: string;
+}
+
 const CreatePoint: React.FC = () => {
+  const [items, setItems] = useState<ResponseItems[]>([]);
+
+  useEffect(() => {
+    api.get('/items').then((response) => setItems(response.data.items));
+  }, []);
+
   return (
     <Container>
       <header>
@@ -104,13 +117,10 @@ const CreatePoint: React.FC = () => {
             </div>
           </legend>
           <FormItemsGrid>
-            {[1, 2, 3, 4, 5, 6].map((item) => (
-              <li key={item} className="selected">
-                <img
-                  src="https://www.svgrepo.com/show/218792/oil.svg"
-                  alt="Oleo"
-                />
-                <span>Óleo de cozinha</span>
+            {items.map((item) => (
+              <li key={item.id} className="selected">
+                <img src={item.imageUrl} alt={item.name} />
+                <span>{item.name}</span>
               </li>
             ))}
           </FormItemsGrid>
