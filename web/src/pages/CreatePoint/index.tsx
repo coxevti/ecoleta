@@ -1,3 +1,4 @@
+import { LeafletMouseEvent } from 'leaflet';
 import React, { ChangeEvent, useCallback, useEffect, useState } from 'react';
 import { ArrowLeft, MapPin } from 'react-feather';
 import { Map, Marker, TileLayer } from 'react-leaflet';
@@ -33,6 +34,7 @@ const CreatePoint: React.FC = () => {
   const [cities, setCities] = useState<string[]>([]);
   const [selectedUF, setSelectedUF] = useState('0');
   const [selectedCity, setSelectedCity] = useState('0');
+  const [positionMap, setPositionMap] = useState<[number, number]>([0, 0]);
 
   useEffect(() => {
     apiIBGE
@@ -68,6 +70,10 @@ const CreatePoint: React.FC = () => {
     },
     [],
   );
+
+  const handleMapClick = useCallback((event: LeafletMouseEvent) => {
+    setPositionMap([event.latlng.lat, event.latlng.lng]);
+  }, []);
 
   return (
     <Container>
@@ -126,12 +132,16 @@ const CreatePoint: React.FC = () => {
               <span>Selecione o endereço no mapa</span>
             </div>
           </legend>
-          <Map center={[-20.46971, -54.70999]} zoom={15}>
+          <Map
+            center={[-20.46971, -54.70999]}
+            zoom={15}
+            onClick={handleMapClick}
+          >
             <TileLayer
               attribution='&amp;copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
               url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
             />
-            <Marker position={[-20.46971, -54.70999]} />
+            <Marker position={positionMap} />
           </Map>
           <FormFieldGroup>
             <FormField>
